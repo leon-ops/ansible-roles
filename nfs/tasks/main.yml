@@ -1,0 +1,38 @@
+---
+# tasks file for nfs
+- name: "install nfs-utils on centos 7"
+  package:
+    name: nfs-utils
+    state: present
+
+- name: "install lib for nfs"
+  package:
+    name: libnfsidmap
+    state: present
+
+- name: "start service rpcbind"
+  service:
+    name: rpcbind
+    enabled: yes
+
+- name: "start service nfs-server"
+  service:
+    name: nfs-server
+    enabled: yes
+
+- name: "start service rpc-statd"
+  service:
+    name: rpc-statd
+    enabled: yes
+
+- name: "start service nfs-idmapd"
+  service:
+    name: nfs-idmapd 
+    enabled: yes
+
+
+- name: copy /etc/exports 
+  copy:
+    src: "{{ role_path }}/files/exports"
+    dest: /etc/exports
+
