@@ -1,0 +1,16 @@
+---
+- hosts: ipatest
+  remote_user: root
+  vars:
+    freeipa_server_manage_host: True
+    freeipa_server_admin_password: debianipa
+    freeipa_server_domain: emv2.com
+    freeipa_server_ds_password: debianipa
+    freeipa_server_fqdn: "{{ ansible_fqdn }}"
+    freeipa_server_ip: "{{ ansible_default_ipv4.address }}"
+    freeipa_server_realm: EMV2.com
+
+
+  roles:
+    - leon.freeipa
+

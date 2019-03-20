@@ -1,0 +1,12 @@
+---
+# tasks file for leon.freeipa
+- name: Install free-ipa-server server on Centos
+  yum: pkg=ipa-server  state=installed
+
+- name: disable firewalld
+  service:
+    name: firewalld
+    state: stopped
+    enabled: False
+
+- include_tasks: configure-freeipa.yml

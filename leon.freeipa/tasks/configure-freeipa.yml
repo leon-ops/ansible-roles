@@ -1,0 +1,4 @@
+---
+
+- name: configure freeipa
+  shell: ipa-server-install -p debianipa -a debianipa --ip-address=192.168.56.81 --domain=emv2.com --realm=EMV2.com --hostname=ipa.emv2.com --no-host-dns --mkhomedir --unattended
