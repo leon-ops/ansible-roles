@@ -1,0 +1,29 @@
+# vi /etc/drbd.d/global_common.conf
+global {
+ usage-count no;
+}
+common {
+ net {
+  protocol C;
+ }
+}
+
+# vi /etc/drbd.d/drbd0.res
+resource drbd0 {
+	disk /dev/sdb;
+	device /dev/drbd0;
+	meta-disk internal;
+	on ylpldrbd01 {
+		address 192.168.1.20:7789;
+	}
+	on ylpldrbd02 {
+		address 192.168.1.21:7789;
+	}
+}
+# drbdadm create-md drbd0
+# systemctl start drbd
+# systemctl enable drbd
+
+
+### source
+http://yallalabs.com/linux/how-to-install-and-configure-drbd-cluster-on-rhel7-centos7/

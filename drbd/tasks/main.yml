@@ -1,0 +1,41 @@
+---
+# tasks file for drbd
+  - name: add drbd repository
+    yum:
+      name: http://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm
+      state: present
+  - name: install drbd90-utils 
+    yum:
+      name: drbd90-utils
+      state: present
+
+  - name: install  drbd90-util-sysvinit
+    yum:
+      name: drbd90-utils-sysvinit
+      state: present
+
+  - name: install kmod-drbd90
+    yum:
+      name: kmod-drbd90
+      state: present
+
+  - name: disable SELinux
+    selinux: state=disabled
+
+  - name: disable firewalld
+    service: firewalld
+    state: stopped
+
+  - name: install corosync
+    yum: 
+      name: corosync
+      state: present
+
+  - name: install pcs pacemaker
+    yum: 
+      name: pcs
+      state: present
+  - name: copy drbd0.res 
+    copy:
+      src: "{{ role_path }}/files/drbd0.res"
+      dest: /etc/drbd.d/drbd0.res
