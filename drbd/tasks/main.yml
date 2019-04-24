@@ -26,6 +26,11 @@
     modprobe:
       name: drbd
       state: present
+      
+  - name: copy drbd.conf
+    copy:
+      src: "{{ role_path }}/files/drbd.conf"
+      dest: /etc/modules-load.d/drbd.conf
 
   - selinux:
       state: disabled
